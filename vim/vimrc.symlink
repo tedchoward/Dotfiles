@@ -1,0 +1,76 @@
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'chriskempson/base16-vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
+Plug 'editorconfig/editorconfig-vim'
+
+" Initialize plugin system
+call plug#end()
+
+let g:mapleader=','
+
+set number
+
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+
+set cmdheight=1
+set shortmess+=c
+
+nnoremap <leader>f :NERDTreeToggle<CR>
+nnoremap <leader>/ :call NERDComment(0, "toggle")<CR>
+vnoremap <leader>/ :call NERDComment(0, "toggle")<CR>
+nnoremap <leader>p :Files<CR>
+
+  autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exec 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+let g:airline_extensions = ['branch', 'hunks', 'coc']
+let g:airline_theme = 'base16_tomorrow'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
+set mouse=a
+let base16colorspace=256
+set background=dark
+colorscheme base16-tomorrow-night

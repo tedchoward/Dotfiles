@@ -1,0 +1,35 @@
+[include]
+	path = ~/.gitconfig.local
+[hub]
+	protocol = https
+[alias]
+	it = !git init && git commit -m \"root\" --allow-empty
+	co = checkout
+	reup = up
+	count = !git shortlog -sn
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim -f
+	autocrlf = input
+[apply]
+	whitespace = nowarn
+[mergetool]
+	keepBackup = false
+[difftool]
+	prompt = false
+[help]
+	autocorrect = 1
+[push]
+	default = simple
+[pull]
+	rebase = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
