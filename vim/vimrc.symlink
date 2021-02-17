@@ -73,4 +73,4 @@ let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 set mouse=a
 let base16colorspace=256
 set background=dark
-colorscheme base16-tomorrow-night
+colorscheme base16-monokai
