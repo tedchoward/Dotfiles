@@ -32,7 +32,7 @@ let g:mapleader=','
 
 set number
 
-set expandtab
+"set expandtab
 set softtabstop=2
 set shiftwidth=2
 
@@ -40,8 +40,8 @@ set cmdheight=1
 set shortmess+=c
 
 nnoremap <leader>f :NERDTreeToggle<CR>
-nnoremap <leader>/ :call NERDComment(0, "toggle")<CR>
-vnoremap <leader>/ :call NERDComment(0, "toggle")<CR>
+nnoremap <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
+vnoremap <leader>/ :call nerdcommenter#Comment(0, "toggle")<CR>
 nnoremap <leader>p :Files<CR>
 
   autocmd StdinReadPre * let s:std_in=1
@@ -62,9 +62,15 @@ inoremap <silent><expr> <TAB>
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 let g:airline_extensions = ['branch', 'hunks', 'coc']
-let g:airline_theme = 'base16_tomorrow'
+"let g:airline_theme = 'base16_tomorrow'
+let g:airline_theme = 'base16_monokai'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.colnr = ' ℅:'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
